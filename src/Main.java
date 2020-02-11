@@ -6,6 +6,7 @@ public class Main {
         datiCorrentista correntista = new datiCorrentista();
         System.out.println("Benvenuto in MikiBank (Registered to Intesa San Pado)! La banca più trasparente dell'acqua!");
 
+
         do {
             System.out.println("    Centro di Amministrazione    ");
             System.out.println("Scelga una voce dal seguente menù");
