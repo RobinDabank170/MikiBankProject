@@ -11,6 +11,7 @@ public class datiCorrentista {
     boolean sesso;
     boolean clienteRegistrato;
 
+
     public datiCorrentista(){}
 
     public datiCorrentista(String cognome, String nome, String codiceFiscale, String dataNascita, String luogoNascita, String residenza, String cittadinanza, String statoCivile, boolean accreditoStipendio, boolean sesso, boolean clienteRegistrato) {
@@ -121,3 +122,5 @@ public class datiCorrentista {
                 + "";
     }
 }
+
+

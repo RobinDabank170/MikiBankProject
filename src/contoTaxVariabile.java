@@ -9,3 +9,5 @@ public class contoTaxVariabile extends datiCorrentista {
         return "contoTaxVariabile{}";
     }
 }
+
+
