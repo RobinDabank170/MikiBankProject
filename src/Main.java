@@ -1,11 +1,16 @@
+import java.io.*;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
         String scelta;
         Scanner input = new Scanner(System.in);
         datiCorrentista correntista = new datiCorrentista();
-        System.out.println("Benvenuto in MikiBank (Registered to Intesa San Pado)! La banca più trasparente dell'acqua!");
+        //datiCorrentista correntista = importa();
+        //datiCorrentista correntista = new datiCorrentista();
+        //salvataggio(correntista);
 
+        salvataggio(correntista);
+        System.out.println("Benvenuto in MikiBank (Registered to Robin Dabank)! La banca più trasparente dell'acqua!");
 
         do {
             System.out.println("    Centro di Amministrazione    ");
@@ -32,11 +37,21 @@ public class Main {
                     //Registrazione SIC
                     System.out.println("    Inizializzazione Scheda Identificativa Cliente  ");
                     System.out.println("L'individuo è un maschio o una femmina?");
-                    correntista.setSesso(input.nextBoolean());
+                    //correntista.setSesso(input.nextBoolean());
                     System.out.println("Cognome dell'individuo: ");
                     correntista.setCognome(input.next());
                     System.out.println("Nome dell'individuo: ");
                     correntista.setNome(input.next());
+                    System.out.println("Data di nascita dell'individuo");
+                    correntista.setDataNascita(input.next());
+                    System.out.println("Luogo di nascita dell'individuo");
+                    correntista.setLuogoNascita(input.next());
+                    System.out.println("Via, città e stato di residenza dell'individuo");
+                    correntista.setResidenza(input.next());
+                    System.out.println("Cittadinanza dell'individuo");
+                    correntista.setCittadinanza(input.next());
+                    System.out.println("Stato civile dell'individuo");
+                    correntista.setStatoCivile(input.next());
                     break;
 
                 case "3":
@@ -51,13 +66,33 @@ public class Main {
                     //Chiusura conto
                     break;
 
-
                 default:
                     System.out.println("La selezione da lei effettuata non corrisponde a nessuna voce sopra indicata! Riprovare per cortesia.");
                     break;
             }
 
-        } while(!scelta.equals("0"));
+        } while (!scelta.equals("0"));
+    }
+
+    public static void salvataggio(datiCorrentista datiCorrentista) {
+        try {
+            FileOutputStream f = new FileOutputStream(new File("data/datiCorrentista/data.txt"));
+            ObjectOutputStream o = new ObjectOutputStream(f);
+            o.writeObject(datiCorrentista);
+            o.close();
+        } catch (Exception e) {
+        }
+    }
+
+    public static datiCorrentista importa() {
+        datiCorrentista dato = new datiCorrentista();
+        try {
+            FileInputStream fi = new FileInputStream(new File("data/datiCorrentista/data.txt"));
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            dato = (datiCorrentista) oi.readObject();
+            oi.close();
+        } catch (Exception e) {
+        }
+        return dato;
     }
 }
-

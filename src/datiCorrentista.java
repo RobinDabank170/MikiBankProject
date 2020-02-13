@@ -1,4 +1,6 @@
-public class datiCorrentista {
+import java.io.Serializable;
+
+public class datiCorrentista implements Serializable {
     String cognome;
     String nome;
     String codiceFiscale;
@@ -13,7 +15,6 @@ public class datiCorrentista {
 
 
     public datiCorrentista(){}
-
     public datiCorrentista(String cognome, String nome, String codiceFiscale, String dataNascita, String luogoNascita, String residenza, String cittadinanza, String statoCivile, boolean accreditoStipendio, boolean sesso, boolean clienteRegistrato) {
         this.cognome = cognome;
         this.nome = nome;
