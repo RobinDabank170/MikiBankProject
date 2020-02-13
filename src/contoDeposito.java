@@ -10,4 +10,3 @@ public class contoDeposito extends datiCorrentista {
     }
 }
 
-
