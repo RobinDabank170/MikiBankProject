@@ -3,10 +3,11 @@ import java.io.Serializable;
 public class datiCorrentista implements Serializable {
     String cognome;
     String nome;
-    String codiceFiscale;
+   // String codiceFiscale;
     String dataNascita;
     String luogoNascita;
     String residenza;
+    String provincia;
     String cittadinanza;
     String statoCivile;
     boolean accreditoStipendio;
@@ -14,11 +15,15 @@ public class datiCorrentista implements Serializable {
     boolean clienteRegistrato;
 
 
-    public datiCorrentista(){}
+    public datiCorrentista(){
+
+    }
+
     public datiCorrentista(String cognome, String nome, String codiceFiscale, String dataNascita, String luogoNascita, String residenza, String cittadinanza, String statoCivile, boolean accreditoStipendio, boolean sesso, boolean clienteRegistrato) {
         this.cognome = cognome;
         this.nome = nome;
-        this.codiceFiscale = codiceFiscale;
+        //this.codiceFiscale = codiceFiscale;
+        this.provincia = provincia;
         this.dataNascita = dataNascita;
         this.luogoNascita = luogoNascita;
         this.residenza = residenza;
@@ -27,6 +32,15 @@ public class datiCorrentista implements Serializable {
         this.accreditoStipendio = accreditoStipendio;
         this.sesso = sesso;
         this.clienteRegistrato = clienteRegistrato;
+    }
+
+    public datiCorrentista(String cognome, String nome, String provincia, String dataNascita, String luogoNascita, boolean sesso) {
+        this.cognome = cognome;
+        this.nome = nome;
+        this.provincia = provincia;
+        this.dataNascita = dataNascita;
+        this.luogoNascita =  luogoNascita;
+        this.sesso = sesso;
     }
 
     public String getCognome() {
@@ -45,12 +59,16 @@ public class datiCorrentista implements Serializable {
         this.nome = nome;
     }
 
-    public String getCodiceFiscale() {
-        return codiceFiscale;
-    }
+    //public String getCodiceFiscale() {
+     //   return codiceFiscale;
+   // }
 
-    public void setCodiceFiscale(String codiceFiscale) {
-        this.codiceFiscale = codiceFiscale;
+    //public void setCodiceFiscale(String codiceFiscale) {
+    //    this.codiceFiscale = codiceFiscale;
+    //}
+
+    public String getProvincia(){
+        return provincia;
     }
 
     public String getDataNascita() {
