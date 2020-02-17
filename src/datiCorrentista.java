@@ -3,7 +3,7 @@ import java.io.Serializable;
 public class datiCorrentista implements Serializable {
     String cognome;
     String nome;
-   // String codiceFiscale;
+    String codiceFiscale;
     String dataNascita;
     String luogoNascita;
     String residenza;
@@ -11,7 +11,7 @@ public class datiCorrentista implements Serializable {
     String cittadinanza;
     String statoCivile;
     boolean accreditoStipendio;
-    boolean sesso;
+    boolean genere;
     boolean clienteRegistrato;
 
 
@@ -19,7 +19,7 @@ public class datiCorrentista implements Serializable {
 
     }
 
-    public datiCorrentista(String cognome, String nome, String codiceFiscale, String dataNascita, String luogoNascita, String residenza, String cittadinanza, String statoCivile, boolean accreditoStipendio, boolean sesso, boolean clienteRegistrato) {
+    public datiCorrentista(String cognome, String nome, String codiceFiscale, String dataNascita, String luogoNascita, String residenza, String cittadinanza, String statoCivile, boolean accreditoStipendio, boolean genere, boolean clienteRegistrato) {
         this.cognome = cognome;
         this.nome = nome;
         //this.codiceFiscale = codiceFiscale;
@@ -30,17 +30,17 @@ public class datiCorrentista implements Serializable {
         this.cittadinanza = cittadinanza;
         this.statoCivile = statoCivile;
         this.accreditoStipendio = accreditoStipendio;
-        this.sesso = sesso;
+        this.genere = genere;
         this.clienteRegistrato = clienteRegistrato;
     }
 
-    public datiCorrentista(String cognome, String nome, String provincia, String dataNascita, String luogoNascita, boolean sesso) {
+    public datiCorrentista(String cognome, String nome, String provincia, String dataNascita, String luogoNascita, boolean genere) {
         this.cognome = cognome;
         this.nome = nome;
         this.provincia = provincia;
         this.dataNascita = dataNascita;
         this.luogoNascita =  luogoNascita;
-        this.sesso = sesso;
+        this.genere = genere;
     }
 
     public String getCognome() {
@@ -59,13 +59,13 @@ public class datiCorrentista implements Serializable {
         this.nome = nome;
     }
 
-    //public String getCodiceFiscale() {
-     //   return codiceFiscale;
-   // }
+    public String getCodiceFiscale() {
+        return codiceFiscale;
+    }
 
-    //public void setCodiceFiscale(String codiceFiscale) {
-    //    this.codiceFiscale = codiceFiscale;
-    //}
+    public void setCodiceFiscale(String codiceFiscale) {
+        this.codiceFiscale = codiceFiscale;
+    }
 
     public String getProvincia(){
         return provincia;
@@ -119,12 +119,12 @@ public class datiCorrentista implements Serializable {
         this.accreditoStipendio = accreditoStipendio;
     }
 
-    public boolean isSesso() {
-        return sesso;
+    public boolean isGenere() {
+        return genere;
     }
 
-    public void setSesso(boolean sesso) {
-        this.sesso = sesso;
+    public void setGenere(boolean genere) {
+        this.genere = genere;
     }
 
     public boolean isClienteRegistrato() {

@@ -37,7 +37,7 @@ public class Main {
                     //Registrazione SIC
                     System.out.println("    Inizializzazione Scheda Identificativa Cliente  ");
                     System.out.println("L'individuo è un maschio o una femmina?");
-                    //correntista.setSesso(input.nextBoolean());
+                    correntista.setGenere(input.nextBoolean());
                     System.out.println("Cognome dell'individuo: ");
                     correntista.setCognome(input.next());
                     System.out.println("Nome dell'individuo: ");
