@@ -75,8 +75,9 @@ public class Main {
     }
 
     public static void salvataggio(datiCorrentista datiCorrentista) {
+        File file = new File("data/datiCorrentista/data.txt");
         try {
-            FileOutputStream f = new FileOutputStream(new File("data/datiCorrentista/data.txt"));
+            FileOutputStream f = new FileOutputStream(file);
             ObjectOutputStream o = new ObjectOutputStream(f);
             o.writeObject(datiCorrentista);
             o.close();
@@ -94,5 +95,23 @@ public class Main {
         } catch (Exception e) {
         }
         return dato;
+    }
+
+    //Si esegue un controllo della presenza del file
+    public static void checkFile() throws IOException, ClassNotFoundException {
+        //Maniglia del file
+        File file = new File("data/datiCorrentista/data.txt");
+        //Controllo se il file esiste
+        if(file.exists()){
+            //Lettura dei dati dal file
+            FileInputStream fi = new FileInputStream(new File("data/datiCorrentista/data.txt"));
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            datiCorrentista dato = (datiCorrentista) oi.readObject();
+        }
+
+        //Creazione dell'arraylist in caso mancasse
+        else{
+            ArrayList<String> conti = new ArrayList<String>();
+        }
     }
 }
