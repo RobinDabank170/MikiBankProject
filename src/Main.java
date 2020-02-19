@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String scelta;
+        int scelta, loginCheck;
         Scanner input = new Scanner(System.in);
         datiCorrentista correntista = new datiCorrentista();
         //datiCorrentista correntista = importa();
@@ -16,15 +16,16 @@ public class Main {
 
         do {
             System.out.println("Digita 0 per uscire, digita 1 per eseguire il login");
-            int loginCheck = input.nextInt();
+            loginCheck = input.nextInt();
             switch (loginCheck) {
                 case 0:
-                    System.exit(0);
-                    System.gc();
+                    System.out.println("    Uscita dalla Login Zone    ");
                     break;
 
                 case 1:
-                    System.out.println("Login Zone");
+                    System.out.println("    Login Zone    ");
+                    System.out.println("    Inserisca il nome utente    ");
+                    System.out.println("    Inserisca la password    ");
                     File login = new File("users/dataAccount/userinfo.txt");
                     if (login.exists()) {
                         //Lettura dei dati dal file
@@ -43,8 +44,11 @@ public class Main {
                     }
                     loginForm();
                     break;
-
             }
+
+        } while (loginCheck != 0);
+
+        do {
             System.out.println("    Centro di Amministrazione    ");
             System.out.println("Scelga una voce dal seguente menù");
             System.out.println("0 ~ Uscita e pulizia della memoria");
@@ -53,19 +57,19 @@ public class Main {
             System.out.println("3 ~ Apertura di un conto");
             System.out.println("4 ~ Gestione di un conto");
             System.out.println("5 ~ Chiusura di un conto");
-            scelta = input.next();
+            scelta = input.nextInt();
             switch (scelta) {
-                case "0":
-                    System.exit(0);
+                case 0:
                     System.gc();
+                    System.exit(0);
                     break;
 
-                case "1":
+                case 1:
                     //Visualizzazione SIC
                     System.out.println("    Scheda Identificativa Cliente   ");
                     break;
 
-                case "2":
+                case 2:
                     //Registrazione SIC
                     System.out.println("    Inizializzazione Scheda Identificativa Cliente  ");
                     System.out.println("L'individuo è un maschio o una femmina?");
@@ -86,15 +90,15 @@ public class Main {
                     correntista.setStatoCivile(input.next());
                     break;
 
-                case "3":
+                case 3:
                     //Apertura conto
                     break;
 
-                case "4":
+                case 4:
                     //Gestione conto
                     break;
 
-                case "5":
+                case 5:
                     //Chiusura conto
                     break;
 
@@ -103,7 +107,7 @@ public class Main {
                     break;
             }
 
-        } while (!scelta.equals("0"));
+        } while (scelta != 0);
     }
 
     public static void salvataggio(datiCorrentista datiCorrentista) {
@@ -156,8 +160,8 @@ public class Main {
             e.printStackTrace();
         }
         Scanner keyboard = new Scanner(System.in);
-        String user = scan.nextLine();
-        String pass = scan.nextLine();
+        String user = scan.next();
+        String pass = scan.next();
 
         String inpUser = keyboard.nextLine();
         String inpPass = keyboard.nextLine();
