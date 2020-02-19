@@ -15,6 +15,36 @@ public class Main {
         System.out.println("Benvenuto in MikiBank (Registered to Robin Dabank)! La banca più trasparente dell'acqua!");
 
         do {
+            System.out.println("Digita 0 per uscire, digita 1 per eseguire il login");
+            int loginCheck = input.nextInt();
+            switch (loginCheck) {
+                case 0:
+                    System.exit(0);
+                    System.gc();
+                    break;
+
+                case 1:
+                    System.out.println("Login Zone");
+                    File login = new File("users/dataAccount/userinfo.txt");
+                    if (login.exists()) {
+                        //Lettura dei dati dal file
+                        try {
+                            FileInputStream fi = new FileInputStream(new File("data/datiCorrentista/data.txt"));
+                            ObjectInputStream oi = new ObjectInputStream(fi);
+                            datiCorrentista dato = (datiCorrentista) oi.readObject();
+                        } catch (Exception e) {
+                        }
+                    } else {
+                        try {
+                            login.createNewFile();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    loginForm();
+                    break;
+
+            }
             System.out.println("    Centro di Amministrazione    ");
             System.out.println("Scelga una voce dal seguente menù");
             System.out.println("0 ~ Uscita e pulizia della memoria");
@@ -114,6 +144,28 @@ public class Main {
         //Creazione dell'arraylist in caso mancasse
         else {
             ArrayList<String> conti = new ArrayList<String>();
+        }
+    }
+
+    //Metodo privato che gestisce esclusivamente il login form per gli amministratori e per gli utenti
+    private static void loginForm() {
+        Scanner scan = null;
+        try {
+            scan = new Scanner(new File("users/dataAccount/userinfo.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Scanner keyboard = new Scanner(System.in);
+        String user = scan.nextLine();
+        String pass = scan.nextLine();
+
+        String inpUser = keyboard.nextLine();
+        String inpPass = keyboard.nextLine();
+
+        if (inpUser.equals(user) && inpPass.equals(pass)) {
+            System.out.println("Login effettuato con successo. Bentornato");
+        } else {
+            System.out.println("Login non effettuato. Le credenziali immesse non sono corrette. Riprovare");
         }
     }
 }
