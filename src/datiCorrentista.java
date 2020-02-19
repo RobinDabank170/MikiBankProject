@@ -15,7 +15,7 @@ public class datiCorrentista implements Serializable {
     boolean clienteRegistrato;
 
 
-    public datiCorrentista(){
+    public datiCorrentista() {
 
     }
 
@@ -39,7 +39,7 @@ public class datiCorrentista implements Serializable {
         this.nome = nome;
         this.provincia = provincia;
         this.dataNascita = dataNascita;
-        this.luogoNascita =  luogoNascita;
+        this.luogoNascita = luogoNascita;
         this.genere = genere;
     }
 
@@ -67,7 +67,7 @@ public class datiCorrentista implements Serializable {
         this.codiceFiscale = codiceFiscale;
     }
 
-    public String getProvincia(){
+    public String getProvincia() {
         return provincia;
     }
 

@@ -1,5 +1,7 @@
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         String scelta;
@@ -102,7 +104,7 @@ public class Main {
         //Maniglia del file
         File file = new File("data/datiCorrentista/data.txt");
         //Controllo se il file esiste
-        if(file.exists()){
+        if (file.exists()) {
             //Lettura dei dati dal file
             FileInputStream fi = new FileInputStream(new File("data/datiCorrentista/data.txt"));
             ObjectInputStream oi = new ObjectInputStream(fi);
@@ -110,7 +112,7 @@ public class Main {
         }
 
         //Creazione dell'arraylist in caso mancasse
-        else{
+        else {
             ArrayList<String> conti = new ArrayList<String>();
         }
     }
