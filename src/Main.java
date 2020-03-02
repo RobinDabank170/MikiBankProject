@@ -14,6 +14,7 @@ public class Main {
         salvataggio(correntista);
         System.out.println("Benvenuto in MikiBank (Registered to Robin Dabank)! La banca più trasparente dell'acqua!");
 
+        //do-while con switch per gestire la Login Zone
         do {
             System.out.println("Digita 0 per uscire, digita 1 per eseguire il login");
             loginCheck = input.nextInt();
