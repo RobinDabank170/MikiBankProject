@@ -1,17 +1,21 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         int scelta, loginCheck;
         Scanner input = new Scanner(System.in);
-        datiCorrentista correntista = new datiCorrentista();
+        datiCorrentista Dati[] = new datiCorrentista[16];
+        ArrayList<datiCorrentista> giuseppe = Controllo();
+        //datiCorrentista correntista = new datiCorrentista();
         //datiCorrentista correntista = importa();
         //datiCorrentista correntista = new datiCorrentista();
         //salvataggio(correntista);
 
-        salvataggio(correntista);
+
         System.out.println("Benvenuto in MikiBank (Registered to Robin Dabank)! La banca più trasparente dell'acqua!");
 
         //do-while con switch per gestire la Login Zone
@@ -43,11 +47,11 @@ public class Main {
                             e.printStackTrace();
                         }
                     }
-                    loginForm();
+                    //loginForm();
                     break;
             }
 
-        } while (loginCheck != 0);
+        } while (loginCheck != 1);
 
         do {
             System.out.println("    Centro di Amministrazione    ");
@@ -68,27 +72,36 @@ public class Main {
                 case 1:
                     //Visualizzazione SIC
                     System.out.println("    Scheda Identificativa Cliente   ");
+                    for (int i = 0; i < giuseppe.size(); i++) {
+                        try {
+                            System.out.println(i + ": " + giuseppe.get(i).toString());
+                        } catch (NullPointerException e) {
+                            System.out.println(i + ": " + "vuoto");
+                        }
+                    }
                     break;
 
                 case 2:
                     //Registrazione SIC
+                    String setGenereT, setCognomeT, setNomeT, setDataNascitaT, setLuogoNascitaT, setResidenzaT, setCittadinanzaT, setStatoCivileT;
                     System.out.println("    Inizializzazione Scheda Identificativa Cliente  ");
                     System.out.println("L'individuo è un maschio o una femmina?");
-                    correntista.setGenere(input.nextBoolean());
+                    setGenereT = input.next();
                     System.out.println("Cognome dell'individuo: ");
-                    correntista.setCognome(input.next());
+                    setCognomeT = input.next();
                     System.out.println("Nome dell'individuo: ");
-                    correntista.setNome(input.next());
+                    setNomeT = input.next();
                     System.out.println("Data di nascita dell'individuo");
-                    correntista.setDataNascita(input.next());
+                    setDataNascitaT = input.next();
                     System.out.println("Luogo di nascita dell'individuo");
-                    correntista.setLuogoNascita(input.next());
+                    setLuogoNascitaT = input.next();
                     System.out.println("Via, città e stato di residenza dell'individuo");
-                    correntista.setResidenza(input.next());
+                    setResidenzaT = input.next();
                     System.out.println("Cittadinanza dell'individuo");
-                    correntista.setCittadinanza(input.next());
+                    setCittadinanzaT = input.next();
                     System.out.println("Stato civile dell'individuo");
-                    correntista.setStatoCivile(input.next());
+                    setStatoCivileT = input.next();
+                    giuseppe.add(new datiCorrentista(setCognomeT, setNomeT, setGenereT, setDataNascitaT, setLuogoNascitaT, setResidenzaT, setCittadinanzaT, setStatoCivileT, true, setGenereT, true));
                     break;
 
                 case 3:
@@ -111,7 +124,45 @@ public class Main {
         } while (scelta != 0);
     }
 
-    public static void salvataggio(datiCorrentista datiCorrentista) {
+
+    public static void Lettura() {
+            try {
+                File file = new File("Demo.txt");
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
+                StringBuffer sb = new StringBuffer();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                    sb.append("\n");
+                }
+                fr.close();
+                System.out.println("Contents of File: ");
+                System.out.println(sb.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public static ArrayList<datiCorrentista> Controllo() throws Exception {
+            File diocane = new File("dati.txt");
+            ArrayList<datiCorrentista> elencocorrentisti;
+            if (diocane.exists()){
+                FileInputStream inputStream = new FileInputStream(diocane);
+                ObjectInputStream reader = new ObjectInputStream(inputStream);
+                //noinspection unchecked
+                elencocorrentisti = (ArrayList<datiCorrentista>) reader.readObject();
+                reader.close();
+                inputStream.close();
+            }else {
+                elencocorrentisti = new ArrayList<datiCorrentista>();
+            }
+            return elencocorrentisti;
+        }
+
+
+
+    /*public static void salvataggio(datiCorrentista datiCorrentista) {
         File file = new File("data/datiCorrentista/data.txt");
         try {
             FileOutputStream f = new FileOutputStream(file);
@@ -120,9 +171,9 @@ public class Main {
             o.close();
         } catch (Exception e) {
         }
-    }
+    }*/
 
-    public static datiCorrentista importa() {
+    /*public static datiCorrentista importa() {
         datiCorrentista dato = new datiCorrentista();
         try {
             FileInputStream fi = new FileInputStream(new File("data/datiCorrentista/data.txt"));
@@ -132,8 +183,8 @@ public class Main {
         } catch (Exception e) {
         }
         return dato;
-    }
-
+    }*/
+/*
     //Si esegue un controllo della presenza del file
     public static void checkFile() throws IOException, ClassNotFoundException {
         //Maniglia del file
@@ -172,5 +223,9 @@ public class Main {
         } else {
             System.out.println("Login non effettuato. Le credenziali immesse non sono corrette. Riprovare");
         }
+
+
     }
-}
+    */
+    }
+

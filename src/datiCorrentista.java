@@ -1,25 +1,20 @@
 import java.io.Serializable;
 
 public class datiCorrentista implements Serializable {
-    String cognome;
-    String nome;
-    String codiceFiscale;
-    String dataNascita;
-    String luogoNascita;
-    String residenza;
-    String provincia;
-    String cittadinanza;
-    String statoCivile;
-    boolean accreditoStipendio;
-    boolean genere;
-    boolean clienteRegistrato;
+    static String cognome;
+    static String nome;
+    static String codiceFiscale;
+    static String dataNascita;
+    static String luogoNascita;
+    static String residenza;
+    static String provincia;
+    static String cittadinanza;
+    static String statoCivile;
+    static boolean accreditoStipendio;
+    static String genere;
+    static boolean clienteRegistrato;
 
-
-    public datiCorrentista() {
-
-    }
-
-    public datiCorrentista(String cognome, String nome, String codiceFiscale, String dataNascita, String luogoNascita, String residenza, String cittadinanza, String statoCivile, boolean accreditoStipendio, boolean genere, boolean clienteRegistrato) {
+    public datiCorrentista(String cognome, String nome, String codiceFiscale, String dataNascita, String luogoNascita, String residenza, String cittadinanza, String statoCivile, boolean accreditoStipendio, String genere, boolean clienteRegistrato) {
         this.cognome = cognome;
         this.nome = nome;
         //this.codiceFiscale = codiceFiscale;
@@ -34,111 +29,119 @@ public class datiCorrentista implements Serializable {
         this.clienteRegistrato = clienteRegistrato;
     }
 
-    public datiCorrentista(String cognome, String nome, String provincia, String dataNascita, String luogoNascita, boolean genere) {
-        this.cognome = cognome;
-        this.nome = nome;
-        this.provincia = provincia;
-        this.dataNascita = dataNascita;
-        this.luogoNascita = luogoNascita;
-        this.genere = genere;
-    }
 
-    public String getCognome() {
+
+    public static String getCognome() {
         return cognome;
     }
 
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
+    public static void setCognome(String cognome) {
+        datiCorrentista.cognome = cognome;
     }
 
-    public String getNome() {
+    public static String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public static void setNome(String nome) {
+        datiCorrentista.nome = nome;
     }
 
-    public String getCodiceFiscale() {
+    public static String getCodiceFiscale() {
         return codiceFiscale;
     }
 
-    public void setCodiceFiscale(String codiceFiscale) {
-        this.codiceFiscale = codiceFiscale;
+    public static void setCodiceFiscale(String codiceFiscale) {
+        datiCorrentista.codiceFiscale = codiceFiscale;
     }
 
-    public String getProvincia() {
-        return provincia;
-    }
-
-    public String getDataNascita() {
+    public static String getDataNascita() {
         return dataNascita;
     }
 
-    public void setDataNascita(String dataNascita) {
-        this.dataNascita = dataNascita;
+    public static void setDataNascita(String dataNascita) {
+        datiCorrentista.dataNascita = dataNascita;
     }
 
-    public String getLuogoNascita() {
+    public static String getLuogoNascita() {
         return luogoNascita;
     }
 
-    public void setLuogoNascita(String luogoNascita) {
-        this.luogoNascita = luogoNascita;
+    public static void setLuogoNascita(String luogoNascita) {
+        datiCorrentista.luogoNascita = luogoNascita;
     }
 
-    public String getResidenza() {
+    public static String getResidenza() {
         return residenza;
     }
 
-    public void setResidenza(String residenza) {
-        this.residenza = residenza;
+    public static void setResidenza(String residenza) {
+        datiCorrentista.residenza = residenza;
     }
 
-    public String getCittadinanza() {
+    public static String getProvincia() {
+        return provincia;
+    }
+
+    public static void setProvincia(String provincia) {
+        datiCorrentista.provincia = provincia;
+    }
+
+    public static String getCittadinanza() {
         return cittadinanza;
     }
 
-    public void setCittadinanza(String cittadinanza) {
-        this.cittadinanza = cittadinanza;
+    public static void setCittadinanza(String cittadinanza) {
+        datiCorrentista.cittadinanza = cittadinanza;
     }
 
-    public String getStatoCivile() {
+    public static String getStatoCivile() {
         return statoCivile;
     }
 
-    public void setStatoCivile(String statoCivile) {
-        this.statoCivile = statoCivile;
+    public static void setStatoCivile(String statoCivile) {
+        datiCorrentista.statoCivile = statoCivile;
     }
 
-    public boolean isAccreditoStipendio() {
+    public static boolean isAccreditoStipendio() {
         return accreditoStipendio;
     }
 
-    public void setAccreditoStipendio(boolean accreditoStipendio) {
-        this.accreditoStipendio = accreditoStipendio;
+    public static void setAccreditoStipendio(boolean accreditoStipendio) {
+        datiCorrentista.accreditoStipendio = accreditoStipendio;
     }
 
-    public boolean isGenere() {
+    public static String getGenere() {
         return genere;
     }
 
-    public void setGenere(boolean genere) {
-        this.genere = genere;
+    public static void setGenere(String genere) {
+        datiCorrentista.genere = genere;
     }
 
-    public boolean isClienteRegistrato() {
+    public static boolean isClienteRegistrato() {
         return clienteRegistrato;
     }
 
-    public void setClienteRegistrato(boolean clienteRegistrato) {
-        this.clienteRegistrato = clienteRegistrato;
+    public static void setClienteRegistrato(boolean clienteRegistrato) {
+        datiCorrentista.clienteRegistrato = clienteRegistrato;
     }
 
-    @Override
     public String toString() {
-        return "Le informazioni sull'individuo correntista sono:"
-                + "";
+        return "datiCorrentista{" +
+                "cognome='" + getCognome() + '\'' +
+                ", nome='" + getNome() + '\'' +
+                ", codiceFiscale='" + getCodiceFiscale() + '\'' +
+                ", dataNascita='" + getDataNascita() + '\'' +
+                ", luogoNascita='" + getLuogoNascita() + '\'' +
+                ", residenza='" + getResidenza() + '\'' +
+                ", provincia='" + getProvincia() + '\'' +
+                ", cittadinanza='" + getCittadinanza() + '\'' +
+                ", statoCivile='" + getStatoCivile() + '\'' +
+                ", accreditoStipendio=" + isAccreditoStipendio() +
+                ", genere='" + getGenere() + '\'' +
+                ", clienteRegistrato=" + isClienteRegistrato() +
+                '}';
     }
 }
 
