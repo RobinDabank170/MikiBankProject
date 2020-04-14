@@ -6,23 +6,31 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        int scelta, loginCheck;
+        int scelta, loginCheck = 0;
         Scanner input = new Scanner(System.in);
-        datiCorrentista Dati[] = new datiCorrentista[16];
-        ArrayList<datiCorrentista> giuseppe = Controllo();
+        //datiCorrentista Dati[] = new datiCorrentista[16];
+        //ArrayList<datiCorrentista> giuseppe = Controllo();
+
+        //ListaCorrentisti salvataggioCorrentisti = new ListaCorrentisti();
+        //esporta(salvataggioCorrentisti);
+
+        ListaCorrentisti salvataggioCorrentisti = importa();
+        ArrayList<datiCorrentista> listaUtenti = salvataggioCorrentisti.getListaCorrentisti();
+        ArrayList<Conto> listaConti = null;
         //datiCorrentista correntista = new datiCorrentista();
         //datiCorrentista correntista = importa();
         //datiCorrentista correntista = new datiCorrentista();
         //salvataggio(correntista);
-
+        float soldiA=0, soldiB=0;
+        int posizioneA=0, posizioneB=0;
 
         System.out.println("Benvenuto in MikiBank (Registered to Robin Dabank)! La banca più trasparente dell'acqua!");
 
         //do-while con switch per gestire la Login Zone
         do {
             System.out.println("Digita 0 per uscire, digita 1 per eseguire il login");
-            loginCheck = input.nextInt();
-            switch (loginCheck) {
+            scelta = Integer.parseInt(input.nextLine());
+            switch (scelta) {
                 case 0:
                     System.out.println("    Uscita dalla Login Zone    ");
                     break;
@@ -30,24 +38,27 @@ public class Main {
                 case 1:
                     System.out.println("    Login Zone    ");
                     System.out.println("    Inserisca il nome utente    ");
+                    String nomeUtente = input.nextLine();
+
                     System.out.println("    Inserisca la password    ");
-                    File login = new File("users/dataAccount/userinfo.txt");
-                    if (login.exists()) {
-                        //Lettura dei dati dal file
-                        try {
-                            FileInputStream fi = new FileInputStream(new File("data/datiCorrentista/data.txt"));
-                            ObjectInputStream oi = new ObjectInputStream(fi);
-                            datiCorrentista dato = (datiCorrentista) oi.readObject();
-                        } catch (Exception e) {
-                        }
-                    } else {
-                        try {
-                            login.createNewFile();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                    String password = input.nextLine();
+
+                    File file = new File("login.txt");
+
+                    Scanner login = new Scanner(file);
+
+                    String nome1 = login.nextLine();
+                    String nome2 = login.nextLine();
+
+                    if(nomeUtente.equals(nome1) && password.equals(nome2)){
+                        System.out.println("Login corretto!");
+                        loginCheck = 1;
                     }
-                    //loginForm();
+                    break;
+                case 2:
+                    salvataggioCorrentisti = new ListaCorrentisti();
+                    listaUtenti = salvataggioCorrentisti.getListaCorrentisti();
+                    esporta(salvataggioCorrentisti);
                     break;
             }
 
@@ -62,7 +73,7 @@ public class Main {
             System.out.println("3 ~ Apertura di un conto");
             System.out.println("4 ~ Gestione di un conto");
             System.out.println("5 ~ Chiusura di un conto");
-            scelta = input.nextInt();
+            scelta = Integer.parseInt(input.nextLine());
             switch (scelta) {
                 case 0:
                     System.gc();
@@ -72,9 +83,9 @@ public class Main {
                 case 1:
                     //Visualizzazione SIC
                     System.out.println("    Scheda Identificativa Cliente   ");
-                    for (int i = 0; i < giuseppe.size(); i++) {
+                    for (int i = 0; i < listaUtenti.size(); i++) {
                         try {
-                            System.out.println(i + ": " + giuseppe.get(i).toString());
+                            System.out.println(i + ": " + listaUtenti.get(i).toString());
                         } catch (NullPointerException e) {
                             System.out.println(i + ": " + "vuoto");
                         }
@@ -83,37 +94,211 @@ public class Main {
 
                 case 2:
                     //Registrazione SIC
-                    String setGenereT, setCognomeT, setNomeT, setDataNascitaT, setLuogoNascitaT, setResidenzaT, setCittadinanzaT, setStatoCivileT;
+                    String setGenereT, setCognomeT, setNomeT, setDataNascitaT, setLuogoNascitaT, setResidenzaT, setCittadinanzaT, setStatoCivileT, setCodiceFiscale;
                     System.out.println("    Inizializzazione Scheda Identificativa Cliente  ");
                     System.out.println("L'individuo è un maschio o una femmina?");
-                    setGenereT = input.next();
+                    setGenereT = input.nextLine();
                     System.out.println("Cognome dell'individuo: ");
-                    setCognomeT = input.next();
+                    setCognomeT = input.nextLine();
                     System.out.println("Nome dell'individuo: ");
-                    setNomeT = input.next();
+                    setNomeT = input.nextLine();
                     System.out.println("Data di nascita dell'individuo");
-                    setDataNascitaT = input.next();
+                    setDataNascitaT = input.nextLine();
                     System.out.println("Luogo di nascita dell'individuo");
-                    setLuogoNascitaT = input.next();
+                    setLuogoNascitaT = input.nextLine();
                     System.out.println("Via, città e stato di residenza dell'individuo");
-                    setResidenzaT = input.next();
+                    setResidenzaT = input.nextLine();
                     System.out.println("Cittadinanza dell'individuo");
-                    setCittadinanzaT = input.next();
+                    setCittadinanzaT = input.nextLine();
                     System.out.println("Stato civile dell'individuo");
-                    setStatoCivileT = input.next();
-                    giuseppe.add(new datiCorrentista(setCognomeT, setNomeT, setGenereT, setDataNascitaT, setLuogoNascitaT, setResidenzaT, setCittadinanzaT, setStatoCivileT, true, setGenereT, true));
+                    setStatoCivileT = input.nextLine();
+                    System.out.println("Inserisci il codice fiscale: ");
+                    setCodiceFiscale = input.nextLine();
+
+
+                    datiCorrentista dato = new datiCorrentista(setCognomeT, setNomeT, setCodiceFiscale, setGenereT, setDataNascitaT, setLuogoNascitaT, setResidenzaT, setCittadinanzaT, setStatoCivileT, true, setGenereT, true);
+
+                    listaUtenti.add(dato);
+
+                    salvataggioCorrentisti.setListaCorrentisti(listaUtenti);
+                    esporta(salvataggioCorrentisti);
                     break;
 
                 case 3:
                     //Apertura conto
-                    break;
+                    System.out.println("Scegli il tipo di conto:\n");
+                    System.out.println("1)Canone fisso");
+                    System.out.println("2)Senza canone");
+                    System.out.println("3)Deposito");
 
+                    int tipoConto = Integer.parseInt(input.nextLine());
+
+                    System.out.println("Inserisci il codice fiscale dell'intestatario: ");
+                    String codiceFiscale = input.nextLine();
+
+                    salvataggioCorrentisti = importa();
+                    listaUtenti = salvataggioCorrentisti.getListaCorrentisti();
+
+                    int posizione = -1;
+                    for(int i=0; i<listaUtenti.size(); i++){
+                        if(codiceFiscale.equals(listaUtenti.get(i).getCodiceFiscale())){
+                            posizione = i;
+                        }
+                    }
+
+                    datiCorrentista utenteTemp = listaUtenti.get(posizione);
+                    String iban = generaIban();
+                    Conto contoTemp = new Conto(tipoConto, iban);
+
+                    utenteTemp.addConto(contoTemp);
+                    listaUtenti.set(posizione, utenteTemp);
+
+                    salvataggioCorrentisti.setListaCorrentisti(listaUtenti);
+                    esporta(salvataggioCorrentisti);
+                    System.out.println("Conto creato correttamente!");
+
+                    break;
                 case 4:
                     //Gestione conto
+                    salvataggioCorrentisti = importa();
+                    listaUtenti = salvataggioCorrentisti.getListaCorrentisti();
+
+                    visualizzaConti();
+
+                    System.out.println("Inserisci l'iban del conto: ");
+                    iban = input.nextLine();
+
+                    posizioneA = -1;
+                    posizioneB = -1;
+
+                    for(int i=0; i<listaUtenti.size(); i++){
+                        utenteTemp = listaUtenti.get(i);
+                        listaConti = utenteTemp.getListaConti();
+                        for(int j=0; j<listaConti.size(); j++){
+                            if(iban.equals(listaConti.get(j).getIban())){
+                                posizioneA = i;
+                                posizioneB = j;
+                            }
+                        }
+                    }
+
+                    utenteTemp = listaUtenti.get(posizioneA);
+                    contoTemp = utenteTemp.getListaConti().get(posizioneB);
+
+                    if(contoTemp.getDisponibilita()) {
+                        System.out.println("Intestatario: " + utenteTemp.getNome() + " " + utenteTemp.getCognome());
+                        System.out.println("Iban: " + contoTemp.getIban());
+                        System.out.println("Data valuta: " + contoTemp.getDataValuta());
+                        System.out.println("Data contabile: " + contoTemp.getDataContabile());
+
+                        System.out.println("\nCosa vuoi fare?");
+                        System.out.println("1)Deposita denaro");
+                        System.out.println("2)Preleva denaro");
+
+                        scelta = Integer.parseInt(input.nextLine());
+
+                        switch (scelta) {
+                            case 1:
+                                System.out.println("\nInserisci la somma da depositare: ");
+                                scelta = Integer.parseInt(input.nextLine());
+
+                                soldiA = contoTemp.getDataContabile();
+                                soldiB = contoTemp.getDataValuta();
+
+                                soldiA += scelta;
+                                soldiB += scelta;
+
+                                contoTemp.setDataContabile(soldiA);
+                                contoTemp.setDataValuta(soldiB);
+
+                                listaConti = utenteTemp.getListaConti();
+                                listaConti.set(posizioneB, contoTemp);
+
+                                utenteTemp.setListaConti(listaConti);
+                                listaUtenti.set(posizioneA, utenteTemp);
+                                salvataggioCorrentisti.setListaCorrentisti(listaUtenti);
+                                esporta(salvataggioCorrentisti);
+                                break;
+                            case 2:
+                                System.out.println("\nInserisci la somma da prelevare: ");
+                                scelta = Integer.parseInt(input.nextLine());
+
+                                soldiA = contoTemp.getDataContabile();
+                                soldiB = contoTemp.getDataValuta();
+
+                                if (soldiA >= scelta) {
+                                    soldiA -= scelta;
+                                    soldiB -= scelta;
+
+                                    contoTemp.setDataContabile(soldiA);
+                                    contoTemp.setDataValuta(soldiB);
+
+                                    listaConti = utenteTemp.getListaConti();
+                                    listaConti.set(posizioneB, contoTemp);
+
+                                    utenteTemp.setListaConti(listaConti);
+                                    listaUtenti.set(posizioneA, utenteTemp);
+                                    salvataggioCorrentisti.setListaCorrentisti(listaUtenti);
+                                    esporta(salvataggioCorrentisti);
+                                } else {
+                                    System.out.println("Impossibile, sei povero non hai abbastanza soldi");
+                                }
+                                break;
+                        }
+                    }else{
+                        System.out.println("Questo conto è bloccato");
+                    }
                     break;
 
                 case 5:
                     //Chiusura conto
+                    visualizzaConti();
+                    System.out.println("Inserisci l'IBAN del conto: ");
+
+                    iban = input.nextLine();
+
+                    for(int i=0; i<listaUtenti.size(); i++){
+                        utenteTemp = listaUtenti.get(i);
+                        listaConti = utenteTemp.getListaConti();
+                        for(int j=0; j<listaConti.size(); j++){
+                            if(iban.equals(listaConti.get(j).getIban())){
+                                posizioneA = i;
+                                posizioneB = j;
+                            }
+                        }
+                    }
+
+                    utenteTemp = listaUtenti.get(posizioneA);
+                    contoTemp = utenteTemp.getListaConti().get(posizioneB);
+
+                    System.out.println("Intestatario: " + utenteTemp.getNome() + " " + utenteTemp.getCognome());
+                    System.out.println("Iban: " + contoTemp.getIban());
+                    System.out.println("Data valuta: " + contoTemp.getDataValuta());
+                    System.out.println("Data contabile: " + contoTemp.getDataContabile());
+
+                    System.out.println("\nCosa vuoi fare?");
+                    System.out.println("1)Bloccare conto");
+                    System.out.println("2)Sbloccare conto");
+
+                    scelta = Integer.parseInt(input.nextLine());
+
+                    switch (scelta){
+                        case 1:
+                            contoTemp.setDisponibilita(false);
+                            break;
+                        case 2:
+                            contoTemp.setDisponibilita(true);
+                            break;
+                    }
+                    listaConti = utenteTemp.getListaConti();
+                    listaConti.set(posizioneB, contoTemp);
+
+                    utenteTemp.setListaConti(listaConti);
+                    listaUtenti.set(posizioneA, utenteTemp);
+                    salvataggioCorrentisti.setListaCorrentisti(listaUtenti);
+                    esporta(salvataggioCorrentisti);
+
+                    System.out.println("Modifica effettuata con successo");
                     break;
 
                 default:
@@ -144,24 +329,69 @@ public class Main {
             }
         }
 
-        public static ArrayList<datiCorrentista> Controllo() throws Exception {
-            File diocane = new File("dati.txt");
-            ArrayList<datiCorrentista> elencocorrentisti;
-            if (diocane.exists()){
-                FileInputStream inputStream = new FileInputStream(diocane);
-                ObjectInputStream reader = new ObjectInputStream(inputStream);
-                //noinspection unchecked
-                elencocorrentisti = (ArrayList<datiCorrentista>) reader.readObject();
-                reader.close();
-                inputStream.close();
-            }else {
-                elencocorrentisti = new ArrayList<datiCorrentista>();
-            }
-            return elencocorrentisti;
+    public static ArrayList<datiCorrentista> Controllo() throws Exception {
+        File diocane = new File("dati.txt");
+        ArrayList<datiCorrentista> elencocorrentisti;
+        if (diocane.exists()){
+            FileInputStream inputStream = new FileInputStream(diocane);
+            ObjectInputStream reader = new ObjectInputStream(inputStream);
+            //noinspection unchecked
+            elencocorrentisti = (ArrayList<datiCorrentista>) reader.readObject();
+            reader.close();
+            inputStream.close();
+        }else {
+            elencocorrentisti = new ArrayList<datiCorrentista>();
         }
+        return elencocorrentisti;
+    }
+
+    public static void esporta(ListaCorrentisti listaCorrentisti) {
+        try {
+            FileOutputStream f = new FileOutputStream(new File("listaUtenti.txt"));
+            ObjectOutputStream o = new ObjectOutputStream(f);
+
+            // Write objects to file
+            o.writeObject(listaCorrentisti);
+            o.close();
+            f.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static ListaCorrentisti importa() {
+        try {
+            FileInputStream fi = new FileInputStream(new File("listaUtenti.txt"));
+            ObjectInputStream oi = new ObjectInputStream(fi);
+
+            // Read objects
+            ListaCorrentisti listaCorrentisti = (ListaCorrentisti) oi.readObject();
+            oi.close();
+
+            return listaCorrentisti;
+        }catch(Exception e){
+            e.printStackTrace();
+            ListaCorrentisti salvataggioutenti = new ListaCorrentisti();
+            esporta(salvataggioutenti);
+            return salvataggioutenti;
+        }
+    }
 
 
+    public static void visualizzaConti(){
+        ListaCorrentisti salvataggioCorrentisti = importa();
+        ArrayList<datiCorrentista> listaUtenti = salvataggioCorrentisti.getListaCorrentisti();
 
+        int conta = 1;
+        for(int i=0; i<listaUtenti.size(); i++){
+            datiCorrentista utenteTemp = listaUtenti.get(i);
+            ArrayList<Conto> listaConti = utenteTemp.getListaConti();
+            for(int j=0; j<listaConti.size(); j++){
+                System.out.println("Conto n° " + conta + "\tIBAN: " + listaConti.get(j).getIban() + "\tSaldo disponibile: " + listaConti.get(j).getDataContabile());
+                conta++;
+            }
+        }
+    }
     /*public static void salvataggio(datiCorrentista datiCorrentista) {
         File file = new File("data/datiCorrentista/data.txt");
         try {
@@ -227,5 +457,45 @@ public class Main {
 
     }
     */
+
+
+
+        public static String generaIban(){
+            String base = "0123456789ABCDEFGHILMNOPQRSTUVZ";
+            String iban = "IT";
+
+            for(int i=0; i<25; i++){
+                iban += base.charAt((int) (Math.random() * 31));
+            }
+
+            ListaCorrentisti salvataggiCorrentisti = importa();
+            ArrayList<datiCorrentista> listaUtenti = salvataggiCorrentisti.getListaCorrentisti();
+
+            while (verificaIban(iban)){
+                iban = generaIban();
+            }
+
+            return iban;
+        }
+
+
+        //metodo che verifica se l'iban è già presente nei dati del correntista
+        public static boolean verificaIban(String iban){
+            ListaCorrentisti salvataggiCorrentisti = importa();
+            ArrayList<datiCorrentista> listaUtenti = salvataggiCorrentisti.getListaCorrentisti();
+
+            for(int i=0; i<listaUtenti.size(); i++){
+                datiCorrentista utenteTemp = listaUtenti.get(i);
+                ArrayList<Conto> listaConti = utenteTemp.getListaConti();
+
+                for(int j=0; j<listaConti.size(); j++){
+                    if(iban.equals(listaConti.get(j).getIban())){
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 

@@ -1,23 +1,37 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class datiCorrentista implements Serializable {
-    static String cognome;
-    static String nome;
-    static String codiceFiscale;
-    static String dataNascita;
-    static String luogoNascita;
-    static String residenza;
-    static String provincia;
-    static String cittadinanza;
-    static String statoCivile;
-    static boolean accreditoStipendio;
-    static String genere;
-    static boolean clienteRegistrato;
+    private String cognome;
+    private String nome;
+    private String codiceFiscale;
+    private String dataNascita;
+    private String luogoNascita;
+    private String residenza;
+    private String provincia;
+    private String cittadinanza;
+    private String statoCivile;
+    private boolean accreditoStipendio;
+    private String genere;
+    private boolean clienteRegistrato;
+    private ArrayList<Conto> listaConti = new ArrayList<Conto>();
 
-    public datiCorrentista(String cognome, String nome, String codiceFiscale, String dataNascita, String luogoNascita, String residenza, String cittadinanza, String statoCivile, boolean accreditoStipendio, String genere, boolean clienteRegistrato) {
+    public ArrayList<Conto> getListaConti() {
+        return listaConti;
+    }
+
+    public void setListaConti(ArrayList<Conto> listaConti) {
+        this.listaConti = listaConti;
+    }
+
+    public void addConto(Conto contoTemp){
+        this.listaConti.add(contoTemp);
+    }
+
+    public datiCorrentista(String cognome, String nome, String codiceFiscale, String provincia, String dataNascita, String luogoNascita, String residenza, String cittadinanza, String statoCivile, boolean accreditoStipendio, String genere, boolean clienteRegistrato) {
         this.cognome = cognome;
         this.nome = nome;
-        //this.codiceFiscale = codiceFiscale;
+        this.codiceFiscale = codiceFiscale;
         this.provincia = provincia;
         this.dataNascita = dataNascita;
         this.luogoNascita = luogoNascita;
@@ -31,100 +45,100 @@ public class datiCorrentista implements Serializable {
 
 
 
-    public static String getCognome() {
+    public String getCognome() {
         return cognome;
     }
 
-    public static void setCognome(String cognome) {
-        datiCorrentista.cognome = cognome;
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
     }
 
-    public static String getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public static void setNome(String nome) {
-        datiCorrentista.nome = nome;
+    public  void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public static String getCodiceFiscale() {
+    public  String getCodiceFiscale() {
         return codiceFiscale;
     }
 
-    public static void setCodiceFiscale(String codiceFiscale) {
-        datiCorrentista.codiceFiscale = codiceFiscale;
+    public  void setCodiceFiscale(String codiceFiscale) {
+        this.codiceFiscale = codiceFiscale;
     }
 
-    public static String getDataNascita() {
+    public  String getDataNascita() {
         return dataNascita;
     }
 
-    public static void setDataNascita(String dataNascita) {
-        datiCorrentista.dataNascita = dataNascita;
+    public  void setDataNascita(String dataNascita) {
+        this.dataNascita = dataNascita;
     }
 
-    public static String getLuogoNascita() {
+    public  String getLuogoNascita() {
         return luogoNascita;
     }
 
-    public static void setLuogoNascita(String luogoNascita) {
-        datiCorrentista.luogoNascita = luogoNascita;
+    public  void setLuogoNascita(String luogoNascita) {
+        this.luogoNascita = luogoNascita;
     }
 
-    public static String getResidenza() {
+    public  String getResidenza() {
         return residenza;
     }
 
-    public static void setResidenza(String residenza) {
-        datiCorrentista.residenza = residenza;
+    public  void setResidenza(String residenza) {
+        this.residenza = residenza;
     }
 
-    public static String getProvincia() {
+    public  String getProvincia() {
         return provincia;
     }
 
-    public static void setProvincia(String provincia) {
-        datiCorrentista.provincia = provincia;
+    public  void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
 
-    public static String getCittadinanza() {
+    public  String getCittadinanza() {
         return cittadinanza;
     }
 
-    public static void setCittadinanza(String cittadinanza) {
-        datiCorrentista.cittadinanza = cittadinanza;
+    public  void setCittadinanza(String cittadinanza) {
+        this.cittadinanza = cittadinanza;
     }
 
-    public static String getStatoCivile() {
+    public  String getStatoCivile() {
         return statoCivile;
     }
 
-    public static void setStatoCivile(String statoCivile) {
-        datiCorrentista.statoCivile = statoCivile;
+    public  void setStatoCivile(String statoCivile) {
+        this.statoCivile = statoCivile;
     }
 
-    public static boolean isAccreditoStipendio() {
+    public  boolean isAccreditoStipendio() {
         return accreditoStipendio;
     }
 
-    public static void setAccreditoStipendio(boolean accreditoStipendio) {
-        datiCorrentista.accreditoStipendio = accreditoStipendio;
+    public  void setAccreditoStipendio(boolean accreditoStipendio) {
+        this.accreditoStipendio = accreditoStipendio;
     }
 
-    public static String getGenere() {
+    public  String getGenere() {
         return genere;
     }
 
-    public static void setGenere(String genere) {
-        datiCorrentista.genere = genere;
+    public  void setGenere(String genere) {
+        this.genere = genere;
     }
 
-    public static boolean isClienteRegistrato() {
+    public  boolean isClienteRegistrato() {
         return clienteRegistrato;
     }
 
-    public static void setClienteRegistrato(boolean clienteRegistrato) {
-        datiCorrentista.clienteRegistrato = clienteRegistrato;
+    public  void setClienteRegistrato(boolean clienteRegistrato) {
+        this.clienteRegistrato = clienteRegistrato;
     }
 
     public String toString() {
@@ -143,5 +157,7 @@ public class datiCorrentista implements Serializable {
                 ", clienteRegistrato=" + isClienteRegistrato() +
                 '}';
     }
+
+
 }
 
